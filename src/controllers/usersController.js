@@ -7,7 +7,6 @@ const getUsers = asyncHandler(async (req, res) => {
     const users = await User.find({ _id: { $ne: req.params.id } }).select([
       "email",
       "name",
-
       "_id",
     ]);
     return res.json(users);
@@ -27,4 +26,5 @@ const updateUsers = asyncHandler(async (req, res) => {
     res.send({ error });
   }
 });
+
 module.exports = { getUsers, updateUsers };
