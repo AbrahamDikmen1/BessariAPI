@@ -1,7 +1,7 @@
 const PostModel = require("../models/postModel.js");
 const UserModel = require("../models/userModel.js");
 const mongoose = require("mongoose");
-
+const fs = require("fs");
 const createPost = async (req, res) => {
   const newPost = new PostModel(req.body);
 

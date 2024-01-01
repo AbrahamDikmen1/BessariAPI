@@ -9,7 +9,7 @@ require("dotenv").config();
 
 const router = express.Router();
 
-router.route("/register").post(registerUser);
+router.post("/register", registerUser);
 router.post("/login", login);
 router.post("/logout", logout);
 

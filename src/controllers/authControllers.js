@@ -7,20 +7,16 @@ const dayjs = require("dayjs");
 
 // Add a new users to the db
 const registerUser = asyncHandler(async (req, res) => {
-  // Schema for register user
   const pattern =
     /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
 
   const schema = Joi.object({
-    name: Joi.string().min(8).max(20).required().label("Name field"),
-
+    name: Joi.string().min(8).max(20).required().label(`Name field`),
     email: Joi.string()
-
       .max(40)
       .required("Password is required")
       .email()
       .label("Email is required"),
-
     password: Joi.string().min(8).regex(RegExp(pattern)).required().messages({
       "string.pattern.base": "",
       "string.min": "",
@@ -32,9 +28,9 @@ const registerUser = asyncHandler(async (req, res) => {
       .label("Password")
       .options({ messages: { "any.only": "{{#label}} does not match" } }),
   });
-  // Check if schema values are good to go
+
   const { error } = schema.validate(req.body);
-  console.log(schema);
+
   if (error) return res.status(400).send(error.details[0].message);
 
   // Check through usernames and emails if the names already exists
